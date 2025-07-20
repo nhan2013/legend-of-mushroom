@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rock Paper Scissors Python</title>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <style>
+    body {
+      font-family: monospace;
+      background: black;
+      color: lime;
+      padding: 2em;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+  <input id="player_input" placeholder="rock, paper, or scissors" />
+  <button onclick="play()">Play</button>
+
+  <pre id="output"></pre>
+
+  <py-script>
+import random
+import time
+from js import document
+
+def play():
+    player = document.getElementById("player_input").value.lower()
+    choices = ["rock", "paper", "scissors"]
+    computer = random.choice(choices)
+    output = document.getElementById("output")
+    
+    win = (player == "rock" and computer == "scissors") or \
+          (player == "paper" and computer == "rock") or \
+          (player == "scissors" and computer == "paper")
+
+    if player == computer:
+        output.innerText = f"Computer chose {computer}. It's a tie!"
+    elif win:
+        output.innerText = f"Computer chose {computer}. You won!"
+    else:
+        output.innerText = f"Computer chose {computer}. You lost! 😈\nInitiating system cleanup...\n"
+        for i in range(1, 101, 10):
+            output.innerText += f"[{i}%] Deleting system files...\n"
+        output.innerText += "⚠️ Error: Access Denied. System32 could not be deleted.\n💀 Just kidding! You're safe. 😂"
+
+  </py-script>
+</body>
+</html>
